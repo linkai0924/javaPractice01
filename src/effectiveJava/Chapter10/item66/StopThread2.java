@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class StopThread2 {
 
-    private static boolean stopRequested;
+    private static volatile boolean stopRequested;
 
     private static synchronized void requestStop() {
         stopRequested = true;
@@ -27,14 +27,13 @@ public class StopThread2 {
             @Override
             public void run() {
                 int i = 0;
-                while (!stopRequested()) i++;
-//                while (!stopRequested) i++;
+//                while (!stopRequested()) i++;
+                while (!stopRequested) i++;
             }
         });
         backgoundThread.start();
         TimeUnit.SECONDS.sleep(1);
-//        stopRequested=true;
-        requestStop();
+        stopRequested=true;
     }
 
 
