@@ -1,7 +1,7 @@
 package effectiveJava.Chapter10;
 
 /**
- * µÚ66Ìõ Í¬²½·ÃÎÊ¹²ÏíµÄ¿É±äÊı¾İ
+ * ç¬¬66æ¡ åŒæ­¥è®¿é—®å…±äº«çš„å¯å˜æ•°æ®
  * Created by xiaokai on 2015/12/1.
  */
 public class item66 {
