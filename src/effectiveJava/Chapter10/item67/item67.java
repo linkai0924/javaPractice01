@@ -2,6 +2,8 @@ package effectiveJava.Chapter10.item67;
 
 import effectiveJava.Chapter04.InstrumentedHashSet;
 
+import java.util.HashSet;
+
 /**
  * 第67条避免过度同步
  * 过度同步可能会导致性能降低、死锁，甚至不确定的行为。
@@ -15,5 +17,16 @@ public class item67 {
      *
      * */
 
+    public static void main(String[] args ){
+        ObservableSet<Integer> set=new ObservableSet<Integer>(new HashSet<Integer>());
+        set.addOberserver(new SetObserver<Integer>() {
+            public void added(ObservableSet set, Integer e) {
+                System.out.println(e);
+            }
+        });
+
+        for (int i=0;i<100;i++)
+            set.add(i);
+    }
 
 }
