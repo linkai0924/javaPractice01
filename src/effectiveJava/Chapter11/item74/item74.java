@@ -1,7 +1,9 @@
-package effectiveJava.Chapter11;
+package effectiveJava.Chapter11.item74;
 
 /**
- * ½÷É÷µÄÊµÏÖserializable½Ó¿Ú
+ * ç¬¬11ç« åºåˆ—åŒ–
+ *
+ *
  * Created by xiaokai on 2015/12/1.
  */
 public class item74 {
