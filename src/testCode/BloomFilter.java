@@ -3,6 +3,7 @@ package testCode;
 import java.util.BitSet;
 
 /**
+ *
  * 布隆过滤器
  */
 public class BloomFilter {
@@ -30,16 +31,16 @@ public class BloomFilter {
     }
 
     public static void main(String[] args) {
-        String value = "xkeyideal@gmail.com";
+        String value = "linkai0924@gmail.com";
         for (int i = 0; i < seeds.length; i++) {
             func[i] = new SimpleHash(DEFAULT_SIZE, seeds[i]);
         }
         add(value);
-        System.out.println(contains("tetet"));
+        System.out.println(contains("test"));
     }
 }
 
-class SimpleHash {//这玩意相当于C++中的结构体
+class SimpleHash {
 
     private int cap;
     private int seed;
