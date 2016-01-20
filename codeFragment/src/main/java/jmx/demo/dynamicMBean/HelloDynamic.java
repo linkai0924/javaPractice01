@@ -6,6 +6,12 @@ import java.util.Iterator;
 
 /**
  * Created by xiaokai on 2016/1/20.
+ * 4、动态MBean：DynamicMBean
+ * 一、前言
+ * 动态MBean是在运行期才定义它的属性和方法，也就是说它有什么属性和方法是可以动态改变的。
+ * 动态MBean主要利用一些辅助类（构造函数类MBeanConstructorInfo、属性类MBeanAttributeInfo、方法类MBeanOperationInfo）来完成这个功能，
+ * 所有的动态MBean必须实现DynamicMBean接口。DynamicMBean写好后，使用方法和第一篇文章中普通的MBean一样。
+ * 给出一个动态MBean的实例，这个实例最初动态构了一个Name属性及一个print方法，当我们执行它的print方法之后，又给此MBean新增了一个print1方法。实例的代码如下：
  */
 public class HelloDynamic implements DynamicMBean {
 
@@ -110,7 +116,7 @@ public class HelloDynamic implements DynamicMBean {
         if (attributes.isEmpty())
             return resultList;
         // for each attribute, try to set it and add to the result list if successfull
-        for (Iterator i = attributes.iterator(); i.hasNext();) {
+        for (Iterator i = attributes.iterator(); i.hasNext(); ) {
             Attribute attr = (Attribute) i.next();
             try {
                 setAttribute(attr);
@@ -125,12 +131,25 @@ public class HelloDynamic implements DynamicMBean {
     }
 
     @Override
-    public Object invoke(String actionName, Object[] params, String[] signature) throws MBeanException, ReflectionException {
-        return null;
+    public Object invoke(String operationName, Object[] params, String[] signature) throws MBeanException, ReflectionException {
+        // Check for a recognized operation name and call the corresponding operation
+        if (operationName.equals("print")) {
+            //具体实现我们的操作方法print
+            System.out.println("Hello, " + name + ", this is HellDynamic!");
+            dynamicAddOperation();
+            return null;
+        } else if (operationName.equals("print1")) {
+            System.out.println("这是动态增加的一方法print1");
+            return null;
+        } else {
+            // unrecognized operation name:
+            throw new ReflectionException(new NoSuchMethodException(operationName), "Cannot find the operation " + operationName + " in " + className);
+        }
     }
 
     @Override
     public MBeanInfo getMBeanInfo() {
-        return null;
+        return mBeanInfo;
+
     }
 }

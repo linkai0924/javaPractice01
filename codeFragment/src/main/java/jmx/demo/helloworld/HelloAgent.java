@@ -1,6 +1,7 @@
 package jmx.demo.helloworld;
 
 import com.sun.jdmk.comm.HtmlAdaptorServer;
+import jmx.demo.dynamicMBean.HelloDynamic;
 import jmx.demo.notification.HelloListener;
 import jmx.demo.notification.Jack;
 
@@ -61,6 +62,11 @@ public class HelloAgent {
         Jack jack=new Jack();
         server.registerMBean(jack,new ObjectName("HelloAgent:name=jack"));
         jack.addNotificationListener(new HelloListener(),null,hello);
+
+        /** 4、DynamicMBean */
+        HelloDynamic helloDynamic=new HelloDynamic();
+        ObjectName helloDynamicName = new ObjectName("HelloAgent:name=helloDynamic");
+        server.registerMBean(helloDynamic,helloDynamicName);
 
         adapter.start();//启动
         System.out.println("start.......");
