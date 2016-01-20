@@ -1,6 +1,8 @@
-package jmx.demo;
+package jmx.demo.helloworld;
 
 import com.sun.jdmk.comm.HtmlAdaptorServer;
+import jmx.demo.notification.HelloListener;
+import jmx.demo.notification.Jack;
 
 import javax.management.MBeanServer;
 import javax.management.MBeanServerFactory;
@@ -46,12 +48,21 @@ import javax.management.ObjectName;
 public class HelloAgent {
     public static void main(String[] args) throws Exception {
         MBeanServer server = MBeanServerFactory.createMBeanServer();
-        ObjectName helloName = new ObjectName("test:name=HelloWorld");
+        /**1、helloworld*/
+        ObjectName helloName = new ObjectName("HelloAgent:name=HelloWorld");
+        Hello hello=new Hello();
         server.registerMBean(new Hello(), helloName);
-        ObjectName adapterName = new ObjectName("HelloAgent:name=htmladaptor,port=8091");
+
+        ObjectName adapterName = new ObjectName("HelloAgent:name=htmlAdaptor,port=8082");
         HtmlAdaptorServer adapter = new HtmlAdaptorServer();
         server.registerMBean(adapter, adapterName);
-        adapter.start();
+
+        /**3、notification 使用*/
+        Jack jack=new Jack();
+        server.registerMBean(jack,new ObjectName("HelloAgent:name=jack"));
+        jack.addNotificationListener(new HelloListener(),null,hello);
+
+        adapter.start();//启动
         System.out.println("start.......");
     }
 }

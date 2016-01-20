@@ -1,4 +1,4 @@
-package jmx.demo;
+package jmx.demo.helloworld;
 
 /**
  * Created by xiaokai on 2016/1/20.
