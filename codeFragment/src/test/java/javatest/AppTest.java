@@ -29,7 +29,7 @@ public class AppTest
     }
 
     /**
-     * Rigourous Test :-)
+     * Rigourous SftpDemowithPriKey :-)
      */
     public void testApp()
     {

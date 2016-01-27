@@ -5,6 +5,11 @@ package javatest;
  */
 public class App {
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        StringBuilder sb=new StringBuilder();
+        sb.append("tetet");
+        sb.append(",");
+        sb.append("11111");
+
+        System.out.println(sb);
     }
 }
