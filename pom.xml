@@ -11,7 +11,6 @@
     <modules>
         <module>codeFragment</module>
         <module>readingSummary</module>
-        <module>../readingSummary</module>
     </modules>
     <dependencies>
         <dependency>
