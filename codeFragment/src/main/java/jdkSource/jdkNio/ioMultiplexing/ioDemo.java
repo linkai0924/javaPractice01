@@ -1,6 +1,4 @@
-package nio.ioMultiplexing;
-
-import sun.org.mozilla.javascript.internal.json.JsonParser;
+package jdkSource.jdkNio.ioMultiplexing;
 
 import java.util.HashMap;
 import java.util.Map;

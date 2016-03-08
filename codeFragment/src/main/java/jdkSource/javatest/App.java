@@ -1,4 +1,4 @@
-package javatest;
+package jdkSource.javatest;
 
 /**
  * Hello world!

@@ -1,4 +1,4 @@
-package javatest;
+package jdkSource.javatest;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

@@ -1,4 +1,4 @@
-package nio.ioMultiplexing;
+package jdkSource.jdkNio.ioMultiplexing;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
