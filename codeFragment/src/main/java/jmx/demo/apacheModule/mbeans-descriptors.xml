@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<mbeans-descriptors>
-    <mbean name="Hello" description="the hello bean" domain="chengang" group="helloGroup" type="mbean.modelbean.Hello">
-        <attribute name="name" description="a name attribute" type="java.lang.String" writeable="true"/>
-        <operation name="printHello" description="a operation to print hello" impact="INFO" returnType="String"/>
-    </mbean>
-</mbeans-descriptors>
