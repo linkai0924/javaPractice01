@@ -1,7 +1,7 @@
 package designPatterns.proxy.javaproxy;
 
-import java.lang.reflect.*;
-import java.util.*;
+import java.lang.reflect.Proxy;
+import java.util.Hashtable;
 
 public class MatchMakingTestDrive {
 	Hashtable<String,PersonBean> datingDB = new Hashtable<String,PersonBean>();

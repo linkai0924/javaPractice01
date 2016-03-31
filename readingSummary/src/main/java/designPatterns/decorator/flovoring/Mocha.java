@@ -1,7 +1,8 @@
 package designPatterns.decorator.flovoring;
 
-import net.dp.decorator.Beverage;
-import net.dp.decorator.CondimentDecorator;
+
+import designPatterns.decorator.Beverage;
+import designPatterns.decorator.CondimentDecorator;
 
 public class Mocha extends CondimentDecorator {
 	Beverage beverage;

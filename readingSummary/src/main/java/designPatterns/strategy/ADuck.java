@@ -1,9 +1,10 @@
 package designPatterns.strategy;
 
-import net.dp.strategy.fly.FlyNoWay;
-import net.dp.strategy.fly.FlyWithWings;
-import net.dp.strategy.quack.MuteQuack;
-import net.dp.strategy.quack.Squeak;
+
+import designPatterns.strategy.fly.FlyNoWay;
+import designPatterns.strategy.fly.FlyWithWings;
+import designPatterns.strategy.quack.MuteQuack;
+import designPatterns.strategy.quack.Squeak;
 
 public class ADuck extends Duck {
 	public ADuck() {

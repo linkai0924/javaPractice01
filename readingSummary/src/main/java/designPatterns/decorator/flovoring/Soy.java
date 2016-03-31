@@ -1,20 +1,21 @@
 package designPatterns.decorator.flovoring;
 
-import net.dp.decorator.Beverage;
-import net.dp.decorator.CondimentDecorator;
+
+import designPatterns.decorator.Beverage;
+import designPatterns.decorator.CondimentDecorator;
 
 public class Soy extends CondimentDecorator {
-	Beverage beverage;
+    Beverage beverage;
 
-	public Soy(Beverage beverage) {
-		this.beverage = beverage;
-	}
+    public Soy(Beverage beverage) {
+        this.beverage = beverage;
+    }
 
-	public String getDescription() {
-		return beverage.getDescription() + ", Soy";
-	}
+    public String getDescription() {
+        return beverage.getDescription() + ", Soy";
+    }
 
-	public double cost() {
-		return .15 + beverage.cost();
-	}
+    public double cost() {
+        return .15 + beverage.cost();
+    }
 }

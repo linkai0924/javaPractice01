@@ -1,9 +1,10 @@
 package designPatterns.acombining.composite;
 
+
+import designPatterns.acombining.ducks.Quackable;
+
 import java.util.ArrayList;
 import java.util.Iterator;
-
-import net.dp.acombining.ducks.Quackable;
 
 public class Flock implements Quackable {
 	protected ArrayList<Quackable> quackers = new ArrayList<Quackable>();

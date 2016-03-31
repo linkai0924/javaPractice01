@@ -1,6 +1,9 @@
 package effectiveJava.Chapter10.item67;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
 /**
  * 第66条 避免过度同步

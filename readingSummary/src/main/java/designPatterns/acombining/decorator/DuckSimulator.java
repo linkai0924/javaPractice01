@@ -1,12 +1,12 @@
 package designPatterns.acombining.decorator;
 
-import net.dp.acombining.adapter.Goose;
-import net.dp.acombining.adapter.GooseAdapter;
-import net.dp.acombining.ducks.DuckCall;
-import net.dp.acombining.ducks.MallardDuck;
-import net.dp.acombining.ducks.Quackable;
-import net.dp.acombining.ducks.RedheadDuck;
-import net.dp.acombining.ducks.RubberDuck;
+
+import designPatterns.acombining.adapter.Goose;
+import designPatterns.acombining.adapter.GooseAdapter;
+import designPatterns.acombining.ducks.DuckCall;
+import designPatterns.acombining.ducks.Quackable;
+import designPatterns.acombining.ducks.RedheadDuck;
+import designPatterns.acombining.ducks.RubberDuck;
 
 public class DuckSimulator {
 	public static void main(String[] args) {
@@ -15,7 +15,7 @@ public class DuckSimulator {
 	}
 
 	void simulate() {
-		Quackable mallardDuck = new QuackCounter(new MallardDuck());
+//		Quackable mallardDuck = new QuackCounter(new MallardDuck());
 		Quackable redheadDuck = new QuackCounter(new RedheadDuck());
 		Quackable duckCall = new QuackCounter(new DuckCall());
 		Quackable rubberDuck = new QuackCounter(new RubberDuck());
@@ -23,7 +23,7 @@ public class DuckSimulator {
 
 		System.out.println("\nDuck Simulator: With Decorator");
 
-		simulate(mallardDuck);
+//		simulate(mallardDuck);
 		simulate(redheadDuck);
 		simulate(duckCall);
 		simulate(rubberDuck);

@@ -1,6 +1,6 @@
 package designPatterns.acombined.djview;
-  
-import javax.swing.JProgressBar;
+
+import javax.swing.*;
 
 @SuppressWarnings("serial")
 public class BeatBar extends JProgressBar implements Runnable { 

@@ -1,6 +1,7 @@
 package designPatterns.acombining.observer;
 
-import net.dp.acombining.ducks.RedheadDuck;
+
+import designPatterns.acombining.ducks.RedheadDuck;
 
 public class RedheadDuck2 extends RedheadDuck implements QuackablePlus{
 	Observable observable;

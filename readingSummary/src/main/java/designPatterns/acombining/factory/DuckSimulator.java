@@ -1,9 +1,10 @@
 package designPatterns.acombining.factory;
 
-import net.dp.acombining.adapter.Goose;
-import net.dp.acombining.adapter.GooseAdapter;
-import net.dp.acombining.decorator.QuackCounter;
-import net.dp.acombining.ducks.Quackable;
+
+import designPatterns.acombining.adapter.Goose;
+import designPatterns.acombining.adapter.GooseAdapter;
+import designPatterns.acombining.decorator.QuackCounter;
+import designPatterns.acombining.ducks.Quackable;
 
 public class DuckSimulator {
 	public static void main(String[] args) {
@@ -29,7 +30,7 @@ public class DuckSimulator {
 		simulate(gooseDuck);
  
 		System.out.println("The ducks quacked " + 
-		                   QuackCounter.getQuacks() + 
+		                   QuackCounter.getQuacks() +
 		                   " times");
 	}
  

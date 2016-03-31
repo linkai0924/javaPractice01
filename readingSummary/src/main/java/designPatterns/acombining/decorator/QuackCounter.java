@@ -1,6 +1,7 @@
 package designPatterns.acombining.decorator;
 
-import net.dp.acombining.ducks.Quackable;
+
+import designPatterns.acombining.ducks.Quackable;
 
 public class QuackCounter implements Quackable {
 	protected Quackable duck;

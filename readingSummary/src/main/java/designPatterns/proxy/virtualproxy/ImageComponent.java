@@ -1,9 +1,7 @@
 package designPatterns.proxy.virtualproxy;
 
-import java.awt.Graphics;
-
-import javax.swing.Icon;
-import javax.swing.JComponent;
+import javax.swing.*;
+import java.awt.*;
 
 class ImageComponent extends JComponent {
 	/**

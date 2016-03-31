@@ -1,11 +1,8 @@
 package designPatterns.proxy.virtualproxy;
 
-import java.awt.Component;
-import java.awt.Graphics;
+import javax.swing.*;
+import java.awt.*;
 import java.net.URL;
-
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 
 class ImageProxy implements Icon {
 	ImageIcon imageIcon;

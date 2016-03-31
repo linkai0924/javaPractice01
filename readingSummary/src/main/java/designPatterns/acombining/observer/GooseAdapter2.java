@@ -1,7 +1,8 @@
 package designPatterns.acombining.observer;
 
-import net.dp.acombining.adapter.Goose;
-import net.dp.acombining.adapter.GooseAdapter;
+
+import designPatterns.acombining.adapter.Goose;
+import designPatterns.acombining.adapter.GooseAdapter;
 
 public class GooseAdapter2 extends GooseAdapter implements QuackablePlus {
 	Observable observable;

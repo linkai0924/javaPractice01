@@ -1,6 +1,7 @@
 package designPatterns.acombining.observer;
 
-import net.dp.acombining.ducks.RubberDuck;
+
+import designPatterns.acombining.ducks.RubberDuck;
 
 public class RubberDuck2 extends RubberDuck implements QuackablePlus {
 	Observable observable;

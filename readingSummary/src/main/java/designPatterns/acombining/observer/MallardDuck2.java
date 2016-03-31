@@ -1,6 +1,7 @@
 package designPatterns.acombining.observer;
 
-import net.dp.acombining.ducks.MallardDuck;
+
+import designPatterns.acombining.ducks.MallardDuck;
 
 public class MallardDuck2 extends MallardDuck implements QuackablePlus{
 	Observable observable;

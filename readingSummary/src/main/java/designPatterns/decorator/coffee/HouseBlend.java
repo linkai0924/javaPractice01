@@ -1,6 +1,7 @@
 package designPatterns.decorator.coffee;
 
-import net.dp.decorator.Beverage;
+
+import designPatterns.decorator.Beverage;
 
 public class HouseBlend extends Beverage {
 

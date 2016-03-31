@@ -1,6 +1,7 @@
 package designPatterns.acombining.observer;
 
-import net.dp.acombining.decorator.QuackCounter;
+
+import designPatterns.acombining.decorator.QuackCounter;
 
 public class QuackCounter2 extends QuackCounter implements QuackablePlus {
 	QuackablePlus duck;

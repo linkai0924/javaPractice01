@@ -1,6 +1,7 @@
 package designPatterns.acombining.adapter;
 
-import net.dp.acombining.ducks.Quackable;
+
+import designPatterns.acombining.ducks.Quackable;
 
 public class GooseAdapter implements Quackable {
 	protected Goose goose;

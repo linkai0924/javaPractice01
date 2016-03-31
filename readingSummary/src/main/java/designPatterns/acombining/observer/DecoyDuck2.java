@@ -1,6 +1,7 @@
 package designPatterns.acombining.observer;
 
-import net.dp.acombining.ducks.DecoyDuck;
+
+import designPatterns.acombining.ducks.DecoyDuck;
 
 public class DecoyDuck2 extends DecoyDuck implements QuackablePlus{
 	Observable observable;

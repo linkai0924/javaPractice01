@@ -1,6 +1,7 @@
 package designPatterns.acombining.observer;
 
-import net.dp.acombining.ducks.DuckCall;
+
+import designPatterns.acombining.ducks.DuckCall;
 
 public class DuckCall2 extends DuckCall implements QuackablePlus{
 	Observable observable;

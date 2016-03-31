@@ -1,6 +1,7 @@
 package designPatterns.acombining.factory;
 
-import net.dp.acombining.ducks.Quackable;
+
+import designPatterns.acombining.ducks.Quackable;
 
 public abstract class AbstractDuckFactory {
  

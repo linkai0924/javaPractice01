@@ -1,6 +1,7 @@
 package designPatterns.acombining.observer;
 
-import net.dp.acombining.adapter.Goose;
+
+import designPatterns.acombining.adapter.Goose;
 
 public class DuckSimulator {
 	public static void main(String[] args) {

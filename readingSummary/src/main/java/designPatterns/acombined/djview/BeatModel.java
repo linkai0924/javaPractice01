@@ -1,15 +1,7 @@
 package designPatterns.acombined.djview;
 
+import javax.sound.midi.*;
 import java.util.ArrayList;
-
-import javax.sound.midi.MetaEventListener;
-import javax.sound.midi.MetaMessage;
-import javax.sound.midi.MidiEvent;
-import javax.sound.midi.MidiSystem;
-import javax.sound.midi.Sequence;
-import javax.sound.midi.Sequencer;
-import javax.sound.midi.ShortMessage;
-import javax.sound.midi.Track;
 
 public class BeatModel implements BeatModelInterface, MetaEventListener {
 	Sequencer sequencer;

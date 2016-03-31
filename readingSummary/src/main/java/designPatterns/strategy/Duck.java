@@ -1,7 +1,8 @@
 package designPatterns.strategy;
 
-import net.dp.strategy.fly.FlyBehavior;
-import net.dp.strategy.quack.QuackBehavior;
+
+import designPatterns.strategy.fly.FlyBehavior;
+import designPatterns.strategy.quack.QuackBehavior;
 
 public abstract class Duck {
 	protected FlyBehavior flyBehavior;
