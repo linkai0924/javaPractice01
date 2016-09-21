@@ -7,9 +7,9 @@ import java.util.EmptyStackException;
  * Created by xiaokai on 2015/12/10.
  */
 public class Stack {
+    private static final int DEFAULT_INTIAL_CAPACITY = 16;
     private Object[] elements;
     private int size = 0;
-    private static final int DEFAULT_INTIAL_CAPACITY = 16;
 
     public Stack() {
         elements = new Object[DEFAULT_INTIAL_CAPACITY];
@@ -23,7 +23,7 @@ public class Stack {
     public Object pop() {
         if (size == 0) throw new EmptyStackException();
         Object result = elements[--size];
-        elements[size]=null;
+        elements[size] = null;
         return result;
     }
 

@@ -5,15 +5,12 @@ import java.util.concurrent.atomic.AtomicReference;
 /**
  * AbstractFoo中所有公有的和受保护的实例方法在开始做任何其他工作之前
  * 都必须先调用checkinit这样可以确保如果有编写不好的子类没有初始化实例。
- *
+ * <p>
  * Created by xiaokai on 2015/12/9.
  */
 public class AbstractFoo {
-    private int x, y;
-
-    private enum State {NEW, INITIALIZING, INITIALIZED}
-
     public final AtomicReference<State> init = new AtomicReference<State>(State.NEW);
+    private int x, y;
 
     public AbstractFoo(int x, int y) {
         initialize(x, y);
@@ -49,4 +46,6 @@ public class AbstractFoo {
             throw new IllegalStateException("Uninitialized");
         }
     }
+
+    private enum State {NEW, INITIALIZING, INITIALIZED}
 }

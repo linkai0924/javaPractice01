@@ -3,7 +3,6 @@ package testCode;
 import java.util.BitSet;
 
 /**
- *
  * 布隆过滤器
  */
 public class BloomFilter {

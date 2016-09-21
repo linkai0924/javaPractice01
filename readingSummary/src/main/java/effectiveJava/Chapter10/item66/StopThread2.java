@@ -33,7 +33,7 @@ public class StopThread2 {
         });
         backgoundThread.start();
         TimeUnit.SECONDS.sleep(1);
-        stopRequested=true;
+        stopRequested = true;
     }
 
 

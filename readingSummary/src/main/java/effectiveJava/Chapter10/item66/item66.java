@@ -6,12 +6,6 @@ import java.util.concurrent.atomic.AtomicLong;
  * Created by xiaokai on 2015/12/1.
  */
 public class item66 {
-    private static volatile int nextSerialNumber = 0;
-
-    public static int generateSerialNumber() {
-        return nextSerialNumber++;
-    }
-
     /**
      * 这个方法的目的是要确保每个调用都返回不同的值,这个方法状态只包含一个可原子访问的域nextSerialNumber
      * 问题在于增量操作符++不是原子的，它在nextSerialNumber域中执行两项操作；
@@ -23,6 +17,11 @@ public class item66 {
      */
 
     private static final AtomicLong nextSerialNum = new AtomicLong();
+    private static volatile int nextSerialNumber = 0;
+
+    public static int generateSerialNumber() {
+        return nextSerialNumber++;
+    }
 
     public static long generateSerailNumber() {
         return nextSerialNum.getAndIncrement();

@@ -14,14 +14,16 @@ public class Period {
         this.end = new Date();
     }
 
-    public Date start(){
+    public Date start() {
         return new Date(start.getTime());
     }
-    public Date end(){
+
+    public Date end() {
         return new Date(start.getTime());
     }
-    public String toString(){
-        return start+"-"+end;
+
+    public String toString() {
+        return start + "-" + end;
     }
 
 }

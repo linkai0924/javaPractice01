@@ -13,12 +13,6 @@ public final class StringList implements Serializable {
     private transient int size = 0;
     private transient Entry head = null;
 
-    private static class Entry {
-        String data;
-        Entry next;
-        Entry previous;
-    }
-
     public final void add(String s) {
 
     }
@@ -37,6 +31,12 @@ public final class StringList implements Serializable {
         for (int i = 0; i < numElements; i++) {
             add((String) s.readObject());
         }
+    }
+
+    private static class Entry {
+        String data;
+        Entry next;
+        Entry previous;
     }
 
 }

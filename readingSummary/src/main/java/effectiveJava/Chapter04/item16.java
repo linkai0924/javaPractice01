@@ -13,14 +13,12 @@ public class item16 {
      * 对于专门为了继承而设计，并且具有很好的文档说明的类来说，使用继承也是非常安全的。
      * 然后对普通的具体类，进行跨越包边界的继承，则是非常危险的。
      */
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
         InstrumentedHashSet s = new InstrumentedHashSet();
         s.addAll(Arrays.asList("snap", "crackie", "pop"));
-        System.out.println("---------"+s.getAddCount());
+        System.out.println("---------" + s.getAddCount());
     }
-
-
 
 
 }

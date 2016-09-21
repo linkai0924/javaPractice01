@@ -1,4 +1,4 @@
-package designPatterns.c02_FactoryMethod.sample01;
+package designPatterns.c03_AbstractFactory.sample01;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -8,7 +8,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 
-
 public class XMLUtil {
     //该方法用于从XML配置文件中提取具体类类名，并返回一个实例对象
     public static Object getBean() {
@@ -17,7 +16,7 @@ public class XMLUtil {
             DocumentBuilderFactory dFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = dFactory.newDocumentBuilder();
             Document doc;
-            doc = builder.parse(new File("D:\\code\\javaPractice01\\readingSummary\\src\\main\\java\\designPatterns\\c02_FactoryMethod\\sample01\\config.xml"));
+            doc = builder.parse(new File("config.xml"));
 
             //获取包含类名的文本节点
             NodeList nl = doc.getElementsByTagName("className");
@@ -34,3 +33,4 @@ public class XMLUtil {
         }
     }
 }
+
