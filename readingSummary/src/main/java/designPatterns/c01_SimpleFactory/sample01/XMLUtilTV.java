@@ -16,7 +16,7 @@ public class XMLUtilTV {
             DocumentBuilderFactory dFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = dFactory.newDocumentBuilder();
             Document doc;
-            doc = builder.parse(new File("configTV.xml"));
+            doc = builder.parse(new File("D:\\code\\javaPractice01\\readingSummary\\src\\main\\java\\designPatterns\\c01_SimpleFactory\\sample01\\configTV.xml"));
 
             //获取包含品牌名称的文本节点
             NodeList nl = doc.getElementsByTagName("brandName");
