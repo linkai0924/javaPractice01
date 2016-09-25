@@ -24,7 +24,7 @@ Java、C#、C++等编程语言，Eclipse、Visual Studio等开发工具，JSP、
 桥接模式-Bridge Pattern 处理多维度变化
 组合模式-Composite Pattern 树形结构的处理
 装饰模式-Decorator Pattern 扩展系统功能
-外观模式-Facade Pattern
+外观模式-Facade Pattern`**``**`
 享元模式-Flyweight Pattern 实现对象的复用
 代理模式-Proxy Pattern
 
