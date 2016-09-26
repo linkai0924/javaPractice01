@@ -78,8 +78,12 @@
             <version>2.2.2</version>
         </dependency>
         <!--SFTP 上传下载 end-->
-
-
+        <!--    netty 4.1 learning      -->
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>4.1.4.Final</version>
+        </dependency>
 
     </dependencies>
 
