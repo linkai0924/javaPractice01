@@ -11,6 +11,7 @@
     <modules>
         <module>codeFragment</module>
         <module>readingSummary</module>
+        <module>spring-core-study</module>
     </modules>
     <dependencies>
         <dependency>
