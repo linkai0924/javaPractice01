@@ -5,13 +5,18 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Retention(RetentionPolicy.RUNTIME)     
-@Target(ElementType.TYPE)  
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE)
 public @interface LeaderComonent {
-	public enum CompType {
-        singleton, nonsingleton,customer
-    };
     CompType injectBy() default CompType.singleton;
-	String name() ;
-	boolean threadsafe() default false;
+
+    ;
+
+    String name();
+
+    boolean threadsafe() default false;
+
+    public enum CompType {
+        singleton, nonsingleton, customer
+    }
 }

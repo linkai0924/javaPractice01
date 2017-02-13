@@ -1,9 +1,9 @@
 package leader.service;
 
+import leader.domain.User;
 import org.springframework.stereotype.Component;
 
-import leader.domain.User;
 @Component
-public class UserService  extends AbstractService<User>{
+public class UserService extends AbstractService<User> {
 
 }

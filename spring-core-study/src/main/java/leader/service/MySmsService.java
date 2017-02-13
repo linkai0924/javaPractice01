@@ -1,20 +1,17 @@
 package leader.service;
 
+import leader.bean.MyServiceLocalStorage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import leader.bean.MyServiceLocalStorage;
-
 @Component
 public class MySmsService {
-	@Autowired
-	private MyServiceLocalStorage localStorage;
+    @Autowired
+    private MyServiceLocalStorage localStorage;
 
-	public MyServiceLocalStorage getLocalStorage() {
-		return localStorage;
-	}
+    public MyServiceLocalStorage getLocalStorage() {
+        return localStorage;
+    }
 
-	 
-	
-	
+
 }

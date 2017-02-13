@@ -1,21 +1,19 @@
 package leader.service;
 
-import java.util.Collection;
-
+import leader.dao.AbstractDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import leader.dao.AbstractDAO;
+import java.util.Collection;
 
 @Component
 public class CompletedService2 {
-@Autowired	
-private Collection<AbstractDAO> allDaos;
+    @Autowired
+    private Collection<AbstractDAO> allDaos;
 
-public Collection<AbstractDAO> getAllDaos() {
-	return allDaos;
-}
+    public Collection<AbstractDAO> getAllDaos() {
+        return allDaos;
+    }
 
- 
 
 }

@@ -7,15 +7,17 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class AppContextUtil {
-   private static ApplicationContext context = null;
-   @EventListener
-   public void setApplicationContext(ContextRefreshedEvent eve) {
+    private static ApplicationContext context = null;
 
-       context = eve.getApplicationContext();
+    public static <T> T getBean(Class<T> clazz) {
 
-   }
-   public static <T> T getBean(Class<T> clazz) {
+        return context.getBean(clazz);
+    }
 
-       return context.getBean(clazz);
-   }
+    @EventListener
+    public void setApplicationContext(ContextRefreshedEvent eve) {
+
+        context = eve.getApplicationContext();
+
+    }
 }

@@ -1,19 +1,18 @@
 package leader.domain;
 
-import javax.annotation.Resource;
-
+import leader.service.HelloWorldBean2;
 import org.springframework.beans.factory.annotation.Configurable;
 
-import leader.service.HelloWorldBean2;
+import javax.annotation.Resource;
 
 @Configurable
 public class MyOrder {
 
-@Resource	
-private HelloWorldBean2 hellBean;
+    @Resource
+    private HelloWorldBean2 hellBean;
 
-public HelloWorldBean2 getHellBean() {
-	return hellBean;
-}
+    public HelloWorldBean2 getHellBean() {
+        return hellBean;
+    }
 
 }

@@ -1,32 +1,31 @@
 package leader.service;
 
+import leader.bean.MyServiceLocalStorage;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
-import leader.bean.MyServiceLocalStorage;
-
 @Component
 @Lazy
-public class MyServiceLocalStorageFactory implements FactoryBean<MyServiceLocalStorage>{
+public class MyServiceLocalStorageFactory implements FactoryBean<MyServiceLocalStorage> {
 
-	public MyServiceLocalStorageFactory()
-	{
-		System.out.println("MyServiceLocalStorageFactory created");
-	}
-	public MyServiceLocalStorage getObject() throws Exception {
-		MyServiceLocalStorage token=new MyServiceLocalStorage();
-		System.out.println("created  MyServiceLocalStorage "+token);
-		return token;
-	}
+    public MyServiceLocalStorageFactory() {
+        System.out.println("MyServiceLocalStorageFactory created");
+    }
 
-	public Class<?> getObjectType() {
-		return MyServiceLocalStorage.class;
-	}
+    public MyServiceLocalStorage getObject() throws Exception {
+        MyServiceLocalStorage token = new MyServiceLocalStorage();
+        System.out.println("created  MyServiceLocalStorage " + token);
+        return token;
+    }
 
-	public boolean isSingleton() {
+    public Class<?> getObjectType() {
+        return MyServiceLocalStorage.class;
+    }
 
-		return false;
-	}
+    public boolean isSingleton() {
+
+        return false;
+    }
 
 }

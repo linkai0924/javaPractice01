@@ -1,14 +1,14 @@
 package leader.bean;
 
 public class MyServiceLocalStorage {
-private String storagePath;
+    private String storagePath;
 
-public String getStoragePath() {
-	return storagePath;
-}
+    public String getStoragePath() {
+        return storagePath;
+    }
 
-public void setStoragePath(String storagePath) {
-	this.storagePath = storagePath;
-}
+    public void setStoragePath(String storagePath) {
+        this.storagePath = storagePath;
+    }
 
 }
