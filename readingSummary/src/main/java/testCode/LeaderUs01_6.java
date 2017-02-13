@@ -15,10 +15,11 @@ public class LeaderUs01_6 {
         for (int i = 0; i < 100; i++) {
             list[i] = random.nextInt(100);
         }
-        System.out.println(list);
+//        System.out.println(list);
         Arrays.parallelSort(list);
-        Arrays.sort(list);
-        System.out.println(list);
+//        Arrays.sort(list);
+//        System.out.println(list);
+        System.out.println(Integer.valueOf(1 << 13));
 
 
     }
