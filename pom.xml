@@ -13,6 +13,7 @@
         <module>codeFragment</module>
         <module>readingSummary</module>
         <module>spring-core-study</module>
+        <module>homework3</module>
     </modules>
     <dependencies>
         <dependency>
