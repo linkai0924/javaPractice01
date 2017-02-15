@@ -3,8 +3,7 @@ package leader.dao;
 public interface AbstractDAO<T> {
 
 
-    // private SessionFactory;
-    public default boolean createDomainObj(T domainObj) {
+    default boolean createDomainObj(T domainObj) {
         return true;
     }
 
