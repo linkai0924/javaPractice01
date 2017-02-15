@@ -11,4 +11,8 @@ public interface AbstractDAO<T> {
         return true;
     }
 
+    default T selectDomainObj(String objId) {
+        return null;
+    }
+
 }

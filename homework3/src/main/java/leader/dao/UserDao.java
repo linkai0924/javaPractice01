@@ -23,6 +23,12 @@ public class UserDao implements AbstractDAO<User> {
 //            e.printStackTrace();
 //        }
 //    }
+    @Override
+    public User selectDomainObj(String userName){
+        URL filePath = this.getClass().getResource("/");
+        File file = new File(filePath.getPath() + "userdata.txt");// 指定要写入的文件
+        return null;
+    }
 
     @Override
     public boolean createDomainObj(User user) {

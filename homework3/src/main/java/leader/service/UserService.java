@@ -1,5 +1,6 @@
 package leader.service;
 
+import leader.bean.SessionMap;
 import leader.bean.User;
 import leader.dao.UserDao;
 import org.springframework.stereotype.Component;
@@ -12,9 +13,12 @@ public class UserService extends leader.service.AbstractService<User> {
     @Resource
     private UserDao userDao;
 
-    public void login() {
-
-        System.out.println("login");
+    public boolean login(User user) {
+        User userLogin = userDao.selectDomainObj(user.getUserName());
+        if (userLogin.getPassword().equals(user.getPassword())) {
+            SessionMap.setUserSession(user);
+            return true;
+        }
     }
 
     public void createUser(User user) {
@@ -23,6 +27,10 @@ public class UserService extends leader.service.AbstractService<User> {
 
     public void updateUser(User user) {
 //        userService.createUser(user);
+    }
+
+    public User getUser(String userName) {
+        return userDao.selectDomainObj(userName);
     }
 
 }
