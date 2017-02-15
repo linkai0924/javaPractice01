@@ -5,7 +5,7 @@
         -XmessageHandlerClass:org.springframework.aop.aspectj.AspectJWeaverMessageHandler">
 
         <!-- only weave classes in our application-specific packages -->
-       <include within="tx.*"/>
+        <include within="tx.*"/>
 
     </weaver>
     <!-- 
@@ -13,4 +13,4 @@
 		<aspect name="org.springframework.transaction.aspectj.AnnotationTransactionAspect"/>
 	</aspects>
      -->
-  </aspectj>
+</aspectj>
