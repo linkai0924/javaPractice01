@@ -19,6 +19,7 @@ public class UserService extends leader.service.AbstractService<User> {
             SessionMap.setUserSession(user);
             return true;
         }
+        return false;
     }
 
     public void createUser(User user) {
