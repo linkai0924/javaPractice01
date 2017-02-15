@@ -1,22 +1,28 @@
 package leader.service;
 
 import leader.bean.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import leader.dao.UserDao;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
 
 @Component
 public class UserService extends leader.service.AbstractService<User> {
 
-    @Autowired
-    private UserService userService;
+    @Resource
+    private UserDao userDao;
 
     public void login() {
+
         System.out.println("login");
-//        userService.createUser(user);
     }
 
     public void createUser(User user) {
-        userService.createUser(user);
+        userDao.createDomainObj(user);
+    }
+
+    public void updateUser(User user) {
+//        userService.createUser(user);
     }
 
 }

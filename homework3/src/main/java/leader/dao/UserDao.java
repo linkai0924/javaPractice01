@@ -11,19 +11,18 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 
-@Lazy
-@Component("userDao")
+@Component
 public class UserDao implements AbstractDAO<User> {
 
 
-    public static void main(String[] args) {
-        try {
-            UserDao userDao = new UserDao();
-            userDao.writeFile("");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+//    public static void main(String[] args) {
+//        try {
+//            UserDao userDao = new UserDao();
+//            userDao.writeFile("");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     @Override
     public boolean createDomainObj(User user) {
