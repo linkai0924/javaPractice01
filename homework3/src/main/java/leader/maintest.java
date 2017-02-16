@@ -1,5 +1,6 @@
 package leader;
 
+import leader.bean.SessionMap;
 import leader.bean.User;
 import leader.service.UserService;
 import org.springframework.context.ApplicationContext;
@@ -21,6 +22,8 @@ public class maintest {
         user.setRegDate(new Date());
         user.setUserName("linkai");
 //        userService.createUser(user);
-        System.out.println(userService.getUser(user.getUserName()));
+//        System.out.println(userService.getUser(user.getUserName()));
+        System.out.println(userService.login(user));
+        System.out.println(SessionMap.getUserSession(user.getUserId() + user.getUserName()));
     }
 }

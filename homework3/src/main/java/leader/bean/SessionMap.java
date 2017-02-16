@@ -18,6 +18,7 @@ public class SessionMap {
 
     public static void setUserSession(User user) {
         UserSession userSession = new UserSession();
+        userSession.setSessionId(user.getUserId()+user.getUserName());
         userSession.setUserName(user.getUserName());
         userSession.setUserId(user.getUserId());
         userSession.setCreateTime(new Date().getTime());
