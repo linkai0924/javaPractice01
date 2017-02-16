@@ -14,6 +14,7 @@
         <module>readingSummary</module>
         <module>spring-core-study</module>
         <module>homework3</module>
+        <module>spring-aop</module>
     </modules>
     <dependencies>
         <dependency>
