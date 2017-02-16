@@ -18,6 +18,16 @@ public class Test1 {
         System.err.println("helloApp");
     }
 
+    /**
+     * ASM is an all purpose Java bytecode manipulation and analysis framework.
+     * It can be used to modify existing classes or dynamically generate classes, directly in binary form.
+     * Provided common transformations and analysis algorithms allow to easily assemble custom complex transformations
+     * and code analysis tools.
+     * ASM offer similar functionality as other bytecode frameworks,
+     * but it is focused on simplicity of use and performance.
+     * Because it was designed and implemented to be as small and as fast as possible
+     * , it makes it very attractive for using in dynamic systems*.
+     * */
     static class AopClassLoader extends ClassLoader implements Opcodes {
         public AopClassLoader(ClassLoader parent) {
             super(parent);
