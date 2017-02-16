@@ -20,6 +20,7 @@ public class maintest {
         user.setPassword("123456");
         user.setRegDate(new Date());
         user.setUserName("linkai");
-        userService.createUser(user);
+//        userService.createUser(user);
+        System.out.println(userService.getUser(user.getUserName()));
     }
 }
