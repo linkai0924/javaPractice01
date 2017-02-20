@@ -10,6 +10,7 @@ public class Main {
 //      HelloWorld helloworld = new HelloWorld();  
 //      helloworld.setName("hfkjdshf");  
 
+        System.out.println(ClassLoader.getSystemResource(""));
         ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
 
         Thread.sleep(5000);
@@ -19,6 +20,6 @@ public class Main {
         Thread.sleep(5000);
         helloworld.hello();
 
-
     }
-}  
+
+}
