@@ -15,6 +15,7 @@
         <module>spring-core-study</module>
         <module>homework3</module>
         <module>spring-aop</module>
+        <module>netty4.0-example</module>
     </modules>
     <dependencies>
         <dependency>
