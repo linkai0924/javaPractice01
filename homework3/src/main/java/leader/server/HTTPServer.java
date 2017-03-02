@@ -1,7 +1,6 @@
 package leader.server;
 
-import leader.controller.HandleGetController;
-import leader.controller.HandlePostController;
+import leader.controller.DispatcherController;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.BufferedReader;
@@ -20,10 +19,7 @@ public class HTTPServer {
 
 
     @Autowired
-    private HandleGetController handleGetController;
-
-    @Autowired
-    private HandlePostController handlePostController;
+    private DispatcherController dispatcherController;
 
     /**
      * server处理方法
@@ -40,41 +36,20 @@ public class HTTPServer {
                  * 接受HTTP请求
                  */
                 String requestHeader;
-                int contentLength = 0;
                 while ((requestHeader = bd.readLine()) != null && !requestHeader.isEmpty()) {
                     System.out.println(requestHeader);
                     /**
                      * 处理GET请求
                      */
                     if (requestHeader.startsWith("GET")) {
-//                        handleGetController.work
-//                        IndexController
-                        int index = requestHeader.indexOf("/?");
-                        if (index == -1) {
-                            System.out.println("GET参数是：" + "null");
-                        } else {
-                            int begin = requestHeader.indexOf("/?") + 2;
-                            int end = requestHeader.indexOf("HTTP/");
-                            String condition = requestHeader.substring(begin, end);
-                            System.out.println("GET参数是：" + condition);
-                        }
+                        dispatcherController.handleGetRequest(requestHeader);
                     }
                     /**
                      * 处理POST请求
                      */
                     if (requestHeader.startsWith("POST /")) {
-                        int begin = requestHeader.indexOf("Content-Lengh:") + "Content-Length:".length();
-                        String postParamterLength = requestHeader.substring(begin).trim();
-                        contentLength = Integer.parseInt(postParamterLength);
-                        System.out.println("POST参数长度是：" + Integer.parseInt(postParamterLength));
+                        dispatcherController.handlePostRequest(requestHeader);
                     }
-                }
-                StringBuilder sb = new StringBuilder();
-                if (contentLength > 0) {
-                    for (int i = 0; i < contentLength; i++) {
-                        sb.append((char) bd.read());
-                    }
-                    System.out.println("POST参数是：" + sb.toString());
                 }
                 //发送回执
                 PrintWriter pw = new PrintWriter(socket.getOutputStream());
