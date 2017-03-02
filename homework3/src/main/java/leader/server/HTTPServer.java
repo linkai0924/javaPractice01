@@ -62,7 +62,7 @@ public class HTTPServer {
                     /**
                      * 处理POST请求
                      */
-                    if (requestHeader.startsWith("Content-Length")) {
+                    if (requestHeader.startsWith("POST /")) {
                         int begin = requestHeader.indexOf("Content-Lengh:") + "Content-Length:".length();
                         String postParamterLength = requestHeader.substring(begin).trim();
                         contentLength = Integer.parseInt(postParamterLength);
