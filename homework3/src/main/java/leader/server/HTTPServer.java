@@ -1,75 +1,73 @@
 package leader.server;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import leader.controller.DispatcherController;
-
-import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-/**
- * 1.request -> http包解析
- * 2.读取资源，处理请求，封装http包
- * 3.返回 -> response
- */
-public class HTTPServer {
 
+public class HTTPServer extends Thread {
 
-    private DispatcherController dispatcherController = new DispatcherController();
+    private File documentRootDirectory;
+    private String indexFileName = "index.html";
+    private ServerSocket server;
+    private int numThreads = 50;
 
-    /**
-     * server处理方法
-     *
-     * @param port
-     */
-    public void service(int port) {
-        try {
-            ServerSocket ss = new ServerSocket(port);
-            while (true) {
-                Socket socket = ss.accept();
-                BufferedReader bd = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                System.out.println(JSON.toJSONString(socket));
-                /**
-                 * 接受HTTP请求
-                 */
-                String requestHeader;
-                JSONObject jsonObject = new JSONObject();
-                while ((requestHeader = bd.readLine()) != null && !requestHeader.isEmpty()) {
-                    System.out.println(JSON.toJSONString(requestHeader));
-                    /**
-                     * 处理GET请求
-                     */
-                    if (requestHeader.startsWith("GET")) {
-                        jsonObject = dispatcherController.handleGetRequest(requestHeader);
-                    }
-                    /**
-                     * 处理POST请求
-                     */
-                    if (requestHeader.startsWith("POST")) {
-                        jsonObject = dispatcherController.handlePostRequest(requestHeader,bd);
-                    }
-                }
-                StringBuffer sb = new StringBuffer();
-                for (int i = 0; i < 5; i++) {
-                    sb.append((char) bd.read());
-                }
-                System.out.println("POST参数是：" + sb.toString());
-                //发送回执
-                PrintWriter pw = new PrintWriter(socket.getOutputStream());
-                pw.print(jsonObject);
-                pw.println("HTTP/1.1 200 OK");
-                pw.println("Content-type:text/html");
-                pw.println();
-                pw.println("<h1>访问成功！</h1>");
-                pw.flush();
-                socket.close();
+    public HTTPServer(File documentRootDirectory, int port, String indexFileName) throws IOException {
+        if (!documentRootDirectory.isDirectory()) {
+            throw new IOException(documentRootDirectory + " does not exist as a directory ");
+        }
+        this.documentRootDirectory = documentRootDirectory;
+        this.indexFileName = indexFileName;
+        this.server = new ServerSocket(port);
+    }
+
+    private HTTPServer(File documentRootDirectory, int port) throws IOException {
+        this(documentRootDirectory, port, "index.html");
+    }
+
+    public void run() {
+        for (int i = 0; i < numThreads; i++) {
+            Thread t = new Thread(new RequestProcessor(documentRootDirectory, indexFileName));
+            t.start();
+        }
+
+        System.out.println("Accepting connection on port " + server.getLocalPort());
+        System.out.println("Document Root: " + documentRootDirectory);
+        while (true) {
+            try {
+                Socket request = server.accept();
+                RequestProcessor.processRequest(request);
+            } catch (IOException e) {
+                // TODO: handle exception
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
+
+
+    /**
+     * @param args
+     */
+    public static void main(String[] args) {
+        File docroot;
+        try {
+            docroot = new File("/Users/linkai/data");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Usage: java HTTPServer docroot port indexfile");
+            return;
+        }
+
+        int port = 8888;
+
+        try {
+            HTTPServer webserver = new HTTPServer(docroot, port);
+            webserver.start();
+        } catch (IOException e) {
+            System.out.println("Server could not start because of an " + e.getClass());
+            System.out.println(e);
+        }
+
+    }
+
 }
+

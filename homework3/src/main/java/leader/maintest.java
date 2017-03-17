@@ -19,7 +19,5 @@ public class maintest {
 //        System.out.println(userService.getUser(user.getUserName()));
 //        System.out.println(userService.login(user));
 //        System.out.println(SessionMap.getUserSession(user.getUserId() + user.getUserName()));
-        HTTPServer httpServer = new HTTPServer();
-        httpServer.service(8888);
     }
 }
