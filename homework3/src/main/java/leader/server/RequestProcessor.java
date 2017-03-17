@@ -1,23 +1,11 @@
 package leader.server;
 
 import com.alibaba.fastjson.JSON;
+import com.google.common.collect.Maps;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.Reader;
-import java.io.Writer;
+import java.io.*;
 import java.net.Socket;
-import java.util.Date;
-import java.util.List;
-import java.util.LinkedList;
-import java.util.StringTokenizer;
+import java.util.*;
 
 
 /**
@@ -27,7 +15,6 @@ public class RequestProcessor implements Runnable {
 
     private static List pool = new LinkedList();
     private File documentRootDirectory;
-    private String indexFileName = "index.html";
 
     public RequestProcessor(File documentRootDirectory, String indexFileName) {
         if (documentRootDirectory.isFile()) {
@@ -37,10 +24,6 @@ public class RequestProcessor implements Runnable {
         try {
             this.documentRootDirectory = documentRootDirectory.getCanonicalFile();
         } catch (IOException e) {
-        }
-
-        if (indexFileName != null) {
-            this.indexFileName = indexFileName;
         }
     }
 
@@ -70,13 +53,11 @@ public class RequestProcessor implements Runnable {
             }
 
             try {
-                String fileName;
-                String contentType;
-                OutputStream raw = new BufferedOutputStream(connection.getOutputStream());
-                Writer out = new OutputStreamWriter(raw);
+                String pathName;
+                PrintWriter writer = new PrintWriter(connection.getOutputStream());
                 Reader in = new InputStreamReader(new BufferedInputStream(connection.getInputStream()), "ASCII");
 
-                StringBuilder request = new StringBuilder(80);
+                StringBuilder request = new StringBuilder(200);
                 while (true) {
                     int c = in.read();
                     if (c == '\t' || c == '\n' || c == -1) {
@@ -93,17 +74,25 @@ public class RequestProcessor implements Runnable {
 //                System.out.println(JSON.toJSON(st));
                 String method = st.nextToken();
                 String version = "";
-                if (method.equals("GET")) {
+                if ("GET".equalsIgnoreCase(method)) {
 
-//                    fileName = st.nextToken();
-//                    if (fileName.endsWith("/")) {
-//                        fileName += indexFileName;
-//                    }
-//                    contentType = guessContentTypeFromName(fileName);
-//                    if (st.hasMoreTokens()) {
-//                        version = st.nextToken();
-//                    }
-//
+
+                    pathName = st.nextToken();
+                    int begin = pathName.indexOf("/");
+                    int end = pathName.contains("?") ? pathName.indexOf("?") : pathName.length();
+                    String path = pathName.substring(begin, end);
+                    switch (path) {
+                        case "createUser":
+                            break;
+                        case "login":
+                            break;
+                        case "updateUser":
+                            break;
+                        default:
+                            break;
+                    }
+
+
 //                    File theFile = new File(documentRootDirectory, fileName.substring(1, fileName.length()));
 //                    if (theFile.canRead() && theFile.getCanonicalPath().startsWith(root)) {
 //                        DataInputStream fis = new DataInputStream(new BufferedInputStream(new FileInputStream(theFile)));
@@ -119,8 +108,12 @@ public class RequestProcessor implements Runnable {
 //                            out.write("Content-Type: " + contentType + "\r\n\r\n");
 //                            out.flush();
 //                        }
-//                        raw.write(theData);
-//                        raw.flush();
+                    Map<String, String> testMap = Maps.newHashMap();
+                    testMap.put("test", "eeeeeeee");
+                    testMap.put("test2", "ffffeeeeee");
+                    writer.println(JSON.toJSONString(testMap));
+                    writer.flush();
+                    writer.close();
 //                    } else {
 //                        if (version.startsWith("HTTP ")) {
 //                            out.write("HTTP/1.0 404 File Not Found\r\n");
@@ -140,19 +133,19 @@ public class RequestProcessor implements Runnable {
 
 
                 } else {//不支持的http method
-                    if (version.startsWith("HTTP ")) {
-                        out.write("HTTP/1.0 501 Not Implemented\r\n");
-                        Date now = new Date();
-                        out.write("Date: " + now + "\r\n");
-                        out.write("Server: HTTPServer 1.0\r\n");
-                        out.write("Content-Type: text/html\r\n\r\n");
-                        out.flush();
-                    }
-                    out.write("<HTML>\r\n");
-                    out.write("<HEAD><TITLE>Not Implemented</TITLE></HRAD>\r\n");
-                    out.write("<BODY>\r\n");
-                    out.write("<H1>HTTP Error 501: Not Implemented</H1>");
-                    out.write("</BODY></HTML>\r\n");
+//                    if (version.startsWith("HTTP ")) {
+//                        out.write("HTTP/1.0 501 Not Implemented\r\n");
+//                        Date now = new Date();
+//                        out.write("Date: " + now + "\r\n");
+//                        out.write("Server: HTTPServer 1.0\r\n");
+//                        out.write("Content-Type: text/html\r\n\r\n");
+//                        out.flush();
+//                    }
+//                    out.write("<HTML>\r\n");
+//                    out.write("<HEAD><TITLE>Not Implemented</TITLE></HRAD>\r\n");
+//                    out.write("<BODY>\r\n");
+//                    out.write("<H1>HTTP Error 501: Not Implemented</H1>");
+//                    out.write("</BODY></HTML>\r\n");
 
                 }
 
