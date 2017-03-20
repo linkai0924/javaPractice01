@@ -7,12 +7,9 @@ public interface AbstractDAO<T> {
         return true;
     }
 
-    default boolean deleteDomainObj(Integer objId) {
-        return true;
-    }
-
     default T selectDomainObj(String objId) {
         return null;
     }
 
+    boolean deleteDomainObj(String userName);
 }

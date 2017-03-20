@@ -32,6 +32,12 @@ public class UserDao implements AbstractDAO<User> {
         return true;
     }
 
+    @Override
+    public boolean deleteDomainObj(String userName) {
+        deleteFile(userName);
+        return true;
+    }
+
     private void writeFile(String str) throws IOException {
         URL filePath = this.getClass().getResource("/");
         File file = new File(filePath.getPath() + "userdata.txt");// 指定要写入的文件
@@ -64,4 +70,28 @@ public class UserDao implements AbstractDAO<User> {
         }
         return null;
     }
+
+    private boolean deleteFile(String userName) {
+        try {
+            URL filePath = this.getClass().getResource("/");
+            File file = new File(filePath.getPath() + "userdata.txt");
+            if (file.isFile() && file.exists()) { // 判断文件是否存在
+                InputStreamReader read = new InputStreamReader(new FileInputStream(file), "UTF-8");// 考虑到编码格式
+                BufferedReader bufferedReader = new BufferedReader(read);
+                String lineTxt = null;
+                while ((lineTxt = bufferedReader.readLine()) != null) {
+                    User user = JSON.toJavaObject(JSON.parseObject(lineTxt), User.class);
+                    if (user.getUserName().equals(userName)) {
+                        return true;
+                    }
+                }
+                bufferedReader.close();
+                read.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
 }

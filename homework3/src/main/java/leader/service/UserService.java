@@ -22,12 +22,24 @@ public class UserService extends leader.service.AbstractService<User> {
         return false;
     }
 
-    public void createUser(User user) {
+    public boolean createUser(User user) {
+        User userLogin = userDao.selectDomainObj(user.getUserName());
+        if (userLogin != null) {
+            System.out.println("用户名已经存在");
+            return false;
+        }
         userDao.createDomainObj(user);
+        return true;
+    }
+
+    public boolean deleteUser(String userName) {
+        userDao.deleteDomainObj(userName);
+        return true;
     }
 
     public void updateUser(User user) {
-//        userService.createUser(user);
+
+
     }
 
     public User getUser(String userName) {

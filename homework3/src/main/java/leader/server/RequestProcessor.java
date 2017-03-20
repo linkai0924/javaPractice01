@@ -2,9 +2,15 @@ package leader.server;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Maps;
+import leader.bean.User;
+import leader.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.*;
 import java.net.Socket;
+import java.net.URLDecoder;
 import java.util.*;
 
 
@@ -14,18 +20,7 @@ import java.util.*;
 public class RequestProcessor implements Runnable {
 
     private static List pool = new LinkedList();
-    private File documentRootDirectory;
-
-    public RequestProcessor(File documentRootDirectory, String indexFileName) {
-        if (documentRootDirectory.isFile()) {
-            throw new IllegalArgumentException();
-        }
-        this.documentRootDirectory = documentRootDirectory;
-        try {
-            this.documentRootDirectory = documentRootDirectory.getCanonicalFile();
-        } catch (IOException e) {
-        }
-    }
+    private ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
 
     public static void processRequest(Socket request) {
         synchronized (pool) {
@@ -34,11 +29,13 @@ public class RequestProcessor implements Runnable {
         }
     }
 
+    public RequestProcessor(ApplicationContext ctx, int no) {
+        System.out.println(no);
+        this.ctx = ctx;
+    }
+
     @Override
     public void run() {
-        //安全性检测
-        String root = documentRootDirectory.getPath();
-
         while (true) {
             Socket connection;
             synchronized (pool) {
@@ -46,6 +43,7 @@ public class RequestProcessor implements Runnable {
                     try {
                         pool.wait();
                     } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
 
                 }
@@ -55,7 +53,7 @@ public class RequestProcessor implements Runnable {
             try {
                 String pathName;
                 PrintWriter writer = new PrintWriter(connection.getOutputStream());
-                Reader in = new InputStreamReader(new BufferedInputStream(connection.getInputStream()), "ASCII");
+                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
                 StringBuilder request = new StringBuilder(200);
                 while (true) {
@@ -71,83 +69,42 @@ public class RequestProcessor implements Runnable {
                 System.out.println(get);
 
                 StringTokenizer st = new StringTokenizer(get);
-//                System.out.println(JSON.toJSON(st));
                 String method = st.nextToken();
-                String version = "";
+                pathName = st.nextToken();
+                int begin = pathName.indexOf("/") + 1;
+                int end = pathName.contains("?") ? pathName.indexOf("?") : pathName.length();
+                String path = pathName.substring(begin, end);
+                Map<String, String> resultMap = Maps.newHashMap();
+                User user = null;
                 if ("GET".equalsIgnoreCase(method)) {
-
-
-                    pathName = st.nextToken();
-                    int begin = pathName.indexOf("/");
-                    int end = pathName.contains("?") ? pathName.indexOf("?") : pathName.length();
-                    String path = pathName.substring(begin, end);
-                    switch (path) {
-                        case "createUser":
-                            break;
-                        case "login":
-                            break;
-                        case "updateUser":
-                            break;
-                        default:
-                            break;
+                    if (pathName.contains("?")) {
+                        String args = pathName.substring(pathName.indexOf("?") + 1, pathName.length());
+                        String decodeArgs = URLDecoder.decode(args, "UTF-8");
+                        user = JSON.toJavaObject(JSON.parseObject(decodeArgs), User.class);
                     }
-
-
-//                    File theFile = new File(documentRootDirectory, fileName.substring(1, fileName.length()));
-//                    if (theFile.canRead() && theFile.getCanonicalPath().startsWith(root)) {
-//                        DataInputStream fis = new DataInputStream(new BufferedInputStream(new FileInputStream(theFile)));
-//                        byte[] theData = new byte[(int) theFile.length()];
-//                        fis.readFully(theData);
-//                        fis.close();
-//                        if (version.startsWith("HTTP ")) {
-//                            out.write("HTTP/1.0 200 OK\r\n");
-//                            Date now = new Date();
-//                            out.write("Date: " + now + "\r\n");
-//                            out.write("Server: HTTPServer 1.0\r\n");
-//                            out.write("Content-length: " + theData.length + "\r\n");
-//                            out.write("Content-Type: " + contentType + "\r\n\r\n");
-//                            out.flush();
-//                        }
-                    Map<String, String> testMap = Maps.newHashMap();
-                    testMap.put("test", "eeeeeeee");
-                    testMap.put("test2", "ffffeeeeee");
-                    writer.println(JSON.toJSONString(testMap));
-                    writer.flush();
-                    writer.close();
-//                    } else {
-//                        if (version.startsWith("HTTP ")) {
-//                            out.write("HTTP/1.0 404 File Not Found\r\n");
-//                            Date now = new Date();
-//                            out.write("Date: " + now + "\r\n");
-//                            out.write("Server: HTTPServer 1.0\r\n");
-//                            out.write("Content-Type: text/html\r\n\r\n");
-//                            out.flush();
-//                        }
-//                        out.write("<HTML>\r\n");
-//                        out.write("<HEAD><TITLE>File Not Found</TITLE></HRAD>\r\n");
-//                        out.write("<BODY>\r\n");
-//                        out.write("<H1>HTTP Error 404: File Not Found</H1>");
-//                        out.write("</BODY></HTML>\r\n");
-//                    }
+                    handleReuqest(path, resultMap, user);
                 } else if (method.equals("POST")) {
-
-
-                } else {//不支持的http method
-//                    if (version.startsWith("HTTP ")) {
-//                        out.write("HTTP/1.0 501 Not Implemented\r\n");
-//                        Date now = new Date();
-//                        out.write("Date: " + now + "\r\n");
-//                        out.write("Server: HTTPServer 1.0\r\n");
-//                        out.write("Content-Type: text/html\r\n\r\n");
-//                        out.flush();
-//                    }
-//                    out.write("<HTML>\r\n");
-//                    out.write("<HEAD><TITLE>Not Implemented</TITLE></HRAD>\r\n");
-//                    out.write("<BODY>\r\n");
-//                    out.write("<H1>HTTP Error 501: Not Implemented</H1>");
-//                    out.write("</BODY></HTML>\r\n");
-
+                    String line;
+                    StringBuilder content = new StringBuilder();
+                    Integer contentLength = 0;
+                    while ((line = in.readLine()) != null) {
+                        System.out.println(line);
+                        content.append(line);
+                        if (line.toLowerCase().contains("content-length:")) {
+                            contentLength = Integer.parseInt(line.substring(16, line.length()));
+                        }
+                    }
+                    String objectStr = content.toString().substring(content.length() - contentLength, content.length());
+                    user = JSON.toJavaObject(JSON.parseObject(objectStr), User.class);
+                    handleReuqest(path, resultMap, user);
+                } else {
+                    resultMap.put("code", "-1");
+                    resultMap.put("data", "unknown method");
+                    resultMap.put("msg", "error");
                 }
+                writer.println(JSON.toJSONString(resultMap));
+                writer.flush();
+                writer.close();
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -162,19 +119,47 @@ public class RequestProcessor implements Runnable {
         }
     }
 
-    public static String guessContentTypeFromName(String name) {
-        if (name.endsWith(".html") || name.endsWith(".htm")) {
-            return "text/html";
-        } else if (name.endsWith(".txt") || name.endsWith(".java")) {
-            return "text/plain";
-        } else if (name.endsWith(".gif")) {
-            return "image/gif";
-        } else if (name.endsWith(".class")) {
-            return "application/octet-stream";
-        } else if (name.endsWith(".jpg") || name.endsWith(".jpeg")) {
-            return "image/jpeg";
-        } else {
-            return "text/plain";
+    private void handleReuqest(String path, Map<String, String> resultMap, User user) {
+        UserService userService = (UserService) ctx.getBean("userService");
+        switch (path) {
+            case "createUser":
+                if (user == null) {
+                    resultMap.put("code", "-1");
+                    resultMap.put("data", null);
+                    resultMap.put("msg", "input args is wrong");
+                } else {
+                    if (userService.createUser(user)) {
+                        resultMap.put("code", "0");
+                        resultMap.put("data", null);
+                        resultMap.put("msg", "success");
+                    } else {
+                        resultMap.put("code", "-1");
+                        resultMap.put("data", "添加用户失败");
+                        resultMap.put("msg", "error");
+                    }
+                }
+                break;
+            case "login":
+                boolean tag = userService.login(user);
+                if (tag) {
+                    resultMap.put("code", "0");
+                    resultMap.put("data", JSON.toJSONString(user));
+                    resultMap.put("msg", "success");
+                }
+                break;
+//                        case "updateUser":
+//                            userService.updateUser(user);
+//
+//                            break;
+//                        case "deleteUser":
+//                            userService.deleteUser(user.getUserName());
+//                            break;
+
+            default:
+                resultMap.put("code", "-1");
+                resultMap.put("data", "unknown method");
+                resultMap.put("msg", "error");
+                break;
         }
     }
 
