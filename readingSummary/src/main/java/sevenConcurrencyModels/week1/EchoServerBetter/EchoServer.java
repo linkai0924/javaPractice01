@@ -6,7 +6,7 @@
  * We make no guarantees that this code is fit for any purpose. 
  * Visit http://www.pragmaticprogrammer.com/titles/pb7con for more book information.
 ***/
-package sevenConcurrencyModels.week1.EchoServerBetter.paulbutcher;
+package sevenConcurrencyModels.week1.EchoServerBetter;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ExecutorService;

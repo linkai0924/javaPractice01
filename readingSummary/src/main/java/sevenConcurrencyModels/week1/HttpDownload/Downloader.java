@@ -6,29 +6,29 @@
  * We make no guarantees that this code is fit for any purpose. 
  * Visit http://www.pragmaticprogrammer.com/titles/pb7con for more book information.
 ***/
-package sevenConcurrencyModels.week1.HttpDownloadBetter.paulbutcher;
+package sevenConcurrencyModels.week1.HttpDownload;
 
 import java.io.*;
 import java.net.URL;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.ArrayList;
 
 class Downloader extends Thread {
   private InputStream in;
   private OutputStream out;
-  private CopyOnWriteArrayList<ProgressListener> listeners;
+  private ArrayList<ProgressListener> listeners;
 
   public Downloader(URL url, String outputFilename) throws IOException {
     in = url.openConnection().getInputStream();
     out = new FileOutputStream(outputFilename);
-    listeners = new CopyOnWriteArrayList<ProgressListener>();
+    listeners = new ArrayList<ProgressListener>();
   }
-  public void addListener(ProgressListener listener) {
+  public synchronized void addListener(ProgressListener listener) {
     listeners.add(listener);
   }
-  public void removeListener(ProgressListener listener) {
+  public synchronized void removeListener(ProgressListener listener) {
     listeners.remove(listener);
   }
-  private void updateProgress(int n) {
+  private synchronized void updateProgress(int n) {
     for (ProgressListener listener: listeners)
       listener.onProgress(n);
   }

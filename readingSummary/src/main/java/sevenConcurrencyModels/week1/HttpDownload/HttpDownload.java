@@ -6,7 +6,7 @@
  * We make no guarantees that this code is fit for any purpose. 
  * Visit http://www.pragmaticprogrammer.com/titles/pb7con for more book information.
 ***/
-package sevenConcurrencyModels.week1.HttpDownload.paulbutcher;
+package sevenConcurrencyModels.week1.HttpDownload;
 
 import java.net.URL;
 

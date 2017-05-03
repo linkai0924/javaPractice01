@@ -6,20 +6,10 @@
  * We make no guarantees that this code is fit for any purpose. 
  * Visit http://www.pragmaticprogrammer.com/titles/pb7con for more book information.
 ***/
-package sevenConcurrencyModels.week1.HelloWorld.paulbutcher;
+package sevenConcurrencyModels.week1.DiningPhilosophersTimeout;
 
-public class HelloWorld {
-
-  public static void main(String[] args) throws InterruptedException {
-    Thread myThread = new Thread() {
-        public void run() {
-          System.out.println("Hello from new thread");
-        }
-      };
-	  
-    myThread.start();
-    Thread.yield();
-    System.out.println("Hello from main thread");
-    myThread.join();
-  }
+class Chopstick {
+	private int id;
+	public Chopstick(int id) { this.id = id; }
+  public int getId() { return id; }
 }
